@@ -1,5 +1,4 @@
-# FlappyDuck
-<img align="left" width="100" height="100" src="screenshots/logo.png"> 
+<img align="left" width="64" height="64" src="screenshots/logo.png"> <h1>FlappyDuck</h1> 
 Simple clone of flappy bird made in libgdx, just trying to learn libgdx.
 
 <center>
