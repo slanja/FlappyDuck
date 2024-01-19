@@ -1,5 +1,5 @@
-<img align="left" width="100" height="100" src="logo.png">
 # FlappyDuck
+<img align="left" width="100" height="100" src="screenshots/logo.png"> 
 Simple clone of flappy bird made in libgdx, just trying to learn libgdx.
 
 <center>
