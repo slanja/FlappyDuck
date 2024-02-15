@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 
-public class Stump {
+public class Pipes {
 
     // duck characteristics
     float stumpSpeed;
@@ -14,7 +14,7 @@ public class Stump {
     // graphics
     Texture stumpTexture;
 
-    public Stump(float stumpSpeed, float width, float height, float xCenter, float yCenter, Texture stumpTexture) {
+    public Pipes(float stumpSpeed, float width, float height, float xCenter, float yCenter, Texture stumpTexture) {
         this.stumpSpeed = stumpSpeed;
         this.stumpTexture = stumpTexture;
         this.boundingBox = new Rectangle(xCenter - width/2, yCenter - height/2, width, height);

@@ -9,12 +9,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import org.w3c.dom.Text;
 
-import java.util.LinkedList;
-import java.util.ListIterator;
+import java.util.Random;
 
 public class GameScreen implements Screen {
+
+    Random rand = new Random();
 
     // screen
     private Camera camera;
@@ -23,12 +23,12 @@ public class GameScreen implements Screen {
     // graphics
     private SpriteBatch batch;
     private Texture background;
-    private  Texture stumpTexture;
+    private  Texture pipeTexture;
     private Texture duckTexture;
 
     // timing
     private int backgroundOffset;
-    private int stumpOffset;
+    private int pipeOffset;
 
     // world parameters
     private final int WORLD_WIDTH = 624;
@@ -36,7 +36,7 @@ public class GameScreen implements Screen {
 
     // game objects
     private Duck playerDuck;
-    private Stump stumpObject;
+    private Pipes pipeObject;
 
 
     GameScreen() {
@@ -49,9 +49,12 @@ public class GameScreen implements Screen {
         // set up game objects
 
         // stump object
-        stumpTexture = new Texture("stump.png");
+        // pipe texture
+        String[] pipes = {"pipe_bottom.png", "pipe_middle.png", "pipe_top.png"};
+        String pipe = pipes[rand.nextInt(pipes.length)];
+        pipeTexture = new Texture(pipe);
 
-        stumpObject = new Stump(50, 90, 130, WORLD_WIDTH, 27, stumpTexture);
+        pipeObject = new Pipes(50, 60, 325, WORLD_WIDTH, WORLD_HEIGHT/2+21, pipeTexture);
 
         // duck
         duckTexture = new Texture("duck.png");
@@ -76,8 +79,6 @@ public class GameScreen implements Screen {
         batch.draw(background, -backgroundOffset, 0, WORLD_WIDTH, WORLD_HEIGHT);
         batch.draw(background, -backgroundOffset+WORLD_WIDTH, 0, WORLD_WIDTH, WORLD_HEIGHT);
 
-        // drawing stump
-
 
         // drawing player
         playerDuck.draw(batch);
@@ -85,6 +86,13 @@ public class GameScreen implements Screen {
         if (playerDuck.boundingBox.y > 23) {
             playerDuck.boundingBox.y = playerDuck.boundingBox.y - 2;
         }
+
+        // drawing pipe
+        pipeObject.draw(batch);
+        pipeObject.boundingBox.x--;
+
+        if (pipeObject.boundingBox.x == -80) pipeObject.boundingBox.x = WORLD_WIDTH+80;
+
 
         batch.end();
     }
