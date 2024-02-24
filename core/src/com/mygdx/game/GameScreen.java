@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -38,6 +39,8 @@ public class GameScreen implements Screen {
     private Duck playerDuck;
     private Pipes pipeObject;
 
+    private Sound sound;
+
 
     GameScreen() {
         camera = new OrthographicCamera();
@@ -47,8 +50,7 @@ public class GameScreen implements Screen {
         backgroundOffset = 0;
 
         // set up game objects
-
-        // stump object
+        
         // pipe texture
         String[] pipes = {"pipe_bottom.png", "pipe_middle.png", "pipe_top.png"};
         String pipe = pipes[rand.nextInt(pipes.length)];
@@ -65,11 +67,15 @@ public class GameScreen implements Screen {
 
     }
 
+
     @Override
     public void render(float deltaTime) {
         batch.begin();
 
         detectInput(deltaTime);
+
+        // quack sound
+        sound = Gdx.audio.newSound(Gdx.files.internal("assets/quack_1.wav"));
 
         // scrolling background
         backgroundOffset++;
@@ -110,6 +116,7 @@ public class GameScreen implements Screen {
             float yChange = playerDuck.duckSpeed*deltaTime;
             yChange = Math.min(yChange, upLimit);
             playerDuck.translate(0f, yChange);
+            sound.play();
         }
     }
 
@@ -145,6 +152,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        sound.dispose();
     }
 }
